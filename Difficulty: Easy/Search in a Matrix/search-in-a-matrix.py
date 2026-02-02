@@ -1,15 +1,23 @@
 class Solution:
     def searchMatrix(self, matrix, x):
-        for row in matrix:
-            row.sort()  
+        
+        def bin(arr):
+            arr.sort()
             low = 0
-            high = len(row) - 1
+            high = len(arr) - 1
+            
             while low <= high:
                 mid = (low + high) // 2
-                if row[mid] == x:
+                if arr[mid] == x:
                     return True
-                elif row[mid] < x:
+                elif arr[mid] < x:
                     low = mid + 1
                 else:
                     high = mid - 1
+            return False
+        
+        for mat in matrix:
+            if bin(mat):
+                return True
+        
         return False
