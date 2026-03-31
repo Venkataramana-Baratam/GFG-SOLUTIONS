@@ -1,33 +1,47 @@
-from collections import deque
+'''
+class Node:
+    def __init__(self, val):
+        self.data = val
+        self.left = None
+        self.right = None
+'''
 
+from collections import deque
+        
 class Solution:
     def topView(self, root):
-        if not root:
-            return []
-
-    
-        q = deque()
-        q.append((root, 0))
-
-    
-        hd_map = {}
-
-        while q:
-            node, hd = q.popleft()
-
-            
-            if hd not in hd_map:
-                hd_map[hd] = node.data
-
-            
-            if node.left:
-                q.append((node.left, hd - 1))
-            if node.right:
-                q.append((node.right, hd + 1))
-
+        # code here
         
-        result = []
-        for hd in sorted(hd_map):
-            result.append(hd_map[hd])
-
-        return result
+        
+        if root is None:
+            return None
+            
+        todo = deque()
+        
+        todo.append((root,0))
+        
+        mpp = {}
+        
+        while todo:
+            
+            node,x = todo.popleft()
+            
+            if x not in mpp:
+                
+                mpp[x] = node.data
+            if node.left:
+                
+                todo.append((node.left,x-1))
+                
+            if node.right:
+                todo.append((node.right,x+1))
+                
+        ans = []
+        
+        for i in sorted(mpp):
+            
+            ans.append(mpp[i])
+            
+        return ans
+        
+        
