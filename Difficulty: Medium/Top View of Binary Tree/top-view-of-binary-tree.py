@@ -5,22 +5,17 @@ class Node:
         self.left = None
         self.right = None
 '''
-
 from collections import deque
-        
 class Solution:
     def topView(self, root):
         # code here
         
-        
-        if root is None:
-            return None
-            
         todo = deque()
         
         todo.append((root,0))
         
         mpp = {}
+        
         
         while todo:
             
@@ -34,14 +29,11 @@ class Solution:
                 todo.append((node.left,x-1))
                 
             if node.right:
-                todo.append((node.right,x+1))
                 
-        ans = []
+                todo.append((node.right,x+1))
+        res = []
         
-        for i in sorted(mpp):
+        for data in sorted(mpp):
+            res.append(mpp[data])
             
-            ans.append(mpp[i])
-            
-        return ans
-        
-        
+        return res
